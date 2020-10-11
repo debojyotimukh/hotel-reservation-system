@@ -29,7 +29,7 @@ public class Hotel {
         this.regularWeekdayRates = regularWeekdayRates;
     }
 
-    public double getPrice(String... dates){
-        return dates.length*regularWeekdayRates;
+    public double getPrice(String... dates) {
+        return dates.length * regularWeekdayRates;
     }
 }
