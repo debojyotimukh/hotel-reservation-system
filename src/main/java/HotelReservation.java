@@ -1,9 +1,10 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class HotelReservation {
-    private static List<Hotel> hotelList = new ArrayList<>();
+    private static final List<Hotel> hotelList = new ArrayList<>();
 
     public static boolean addHotel(Hotel hotel) {
         if (hotel == null)
@@ -16,12 +17,17 @@ public class HotelReservation {
 
     public static String getCheapestHotel(String... dates) {
         Hotel cheapestHotel = hotelList.get(0);
-        double cheapestRate = hotelList.get(0).getPrice(dates);
-        for (Hotel hotel : hotelList) {
-            if (hotel.getPrice(dates) < cheapestRate) {
-                cheapestHotel = hotel;
-                cheapestRate = hotel.getPrice(dates);
+        double cheapestRate=0;
+        try {
+            cheapestRate = hotelList.get(0).getPrice(dates);
+            for (Hotel hotel : hotelList) {
+                if (hotel.getPrice(dates) < cheapestRate) {
+                    cheapestHotel = hotel;
+                    cheapestRate = hotel.getPrice(dates);
+                }
             }
+        }catch (ParseException e){
+            e.printStackTrace();
         }
         return cheapestHotel.getName() + ", Total Rates: $" + Math.round(cheapestRate);
     }
