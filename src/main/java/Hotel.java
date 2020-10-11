@@ -28,4 +28,8 @@ public class Hotel {
     public void setRegularWeekdayRates(double regularWeekdayRates) {
         this.regularWeekdayRates = regularWeekdayRates;
     }
+
+    public double getPrice(String... dates){
+        return dates.length*regularWeekdayRates;
+    }
 }
