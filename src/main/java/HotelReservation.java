@@ -29,7 +29,7 @@ public class HotelReservation {
     public static void main(String[] args) {
         System.out.println("Welcome to hotel reservation program");
         addHotel(new Hotel("Lakewood", 110, 90));
-        addHotel(new Hotel("Bridgewood", 160, 60));
+        addHotel(new Hotel("Bridgewood", 150, 50));
         addHotel(new Hotel("Ridgewood", 220, 150));
         Scanner sc = new Scanner(System.in);
         String[] dates = sc.nextLine().split(",");
