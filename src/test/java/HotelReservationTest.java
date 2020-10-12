@@ -7,9 +7,9 @@ public class HotelReservationTest {
 
     @Before
     public void init() {
-        lakewood = new Hotel("Lakewood", 110, 90);
-        bridgewood = new Hotel("Bridgewood", 150, 50);
-        ridgewood = new Hotel("Ridgewood", 220, 150);
+        lakewood = new Hotel("Lakewood", 110, 90, 3);
+        bridgewood = new Hotel("Bridgewood", 150, 50, 4);
+        ridgewood = new Hotel("Ridgewood", 220, 150, 5);
     }
 
     @Test
