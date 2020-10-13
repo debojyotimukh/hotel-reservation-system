@@ -1,3 +1,5 @@
+package com.capgemini.training.java.hotelreservation;
+
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -13,7 +15,8 @@ public class HotelReservation {
         return true;
     }
 
-    public static String getCheapestBestRatedHotel(Hotel.CUSTOMER_TYPE cType, String start, String end) {
+    public static String getCheapestBestRatedHotel(Hotel.CUSTOMER_TYPE cType, String start, String end)
+            throws InvalidDateException {
         Map<Hotel, Double> map = new TreeMap<>();
         for (Hotel hotel : hotelList) {
             map.put(hotel, hotel.getPrice(cType, start, end));
@@ -23,7 +26,8 @@ public class HotelReservation {
         return result.getKey().getName() + ", Rating: " + result.getKey().getRating() + ", Rate: " + result.getValue();
     }
 
-    public static String getBestRatedHotel(Hotel.CUSTOMER_TYPE cType, String start, String end) {
+    public static String getBestRatedHotel(Hotel.CUSTOMER_TYPE cType, String start, String end)
+            throws InvalidDateException {
         hotelList.sort(Comparator.naturalOrder());
         return hotelList.get(0).getName() + ", Rate: " + hotelList.get(0).getPrice(cType, start, end);
     }
@@ -38,7 +42,11 @@ public class HotelReservation {
         sc.close();
         Hotel.CUSTOMER_TYPE cType = dates[0].equalsIgnoreCase("Regular") ? Hotel.CUSTOMER_TYPE.REGULAR
                 : Hotel.CUSTOMER_TYPE.REWARDS;
-        System.out.println(getBestRatedHotel(cType,dates[1], dates[2]));
+        try {
+            System.out.println(getBestRatedHotel(cType, dates[1], dates[2]));
+        } catch (InvalidDateException e) {
+            e.getMessage();
+        }
 
     }
 }

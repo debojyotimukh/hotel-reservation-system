@@ -1,3 +1,5 @@
+package com.capgemini.training.java.hotelreservation;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,3 +1,5 @@
+package com.capgemini.training.java.hotelreservation;
+
 public class Hotel implements Comparable<Hotel> {
     private final String name;
     private double regularWeekdayRates;
@@ -13,6 +15,7 @@ public class Hotel implements Comparable<Hotel> {
 
     public Hotel(String name, double regularWeekdayRates, double regularWeekendRates, double specialWeekdayRates,
             double specialWeekendRates, int rating) {
+        
         this.name = name;
         this.regularWeekdayRates = regularWeekdayRates;
         this.regularWeekendRates = regularWeekendRates;
@@ -45,7 +48,7 @@ public class Hotel implements Comparable<Hotel> {
         this.regularWeekdayRates = regularWeekdayRates;
     }
 
-    public double getPrice(CUSTOMER_TYPE cType, String start, String end) {
+    public double getPrice(CUSTOMER_TYPE cType, String start, String end) throws InvalidDateException {
         double rate;
         double weekendRates = cType.equals(CUSTOMER_TYPE.REGULAR) ? regularWeekendRates : specialWeekendRates;
         double weekdayRates = cType.equals(CUSTOMER_TYPE.REGULAR) ? regularWeekdayRates : specialWeekdayRates;

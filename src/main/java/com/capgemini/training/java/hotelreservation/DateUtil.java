@@ -1,3 +1,5 @@
+package com.capgemini.training.java.hotelreservation;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,9 +15,16 @@ public class DateUtil {
         return date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
     }
 
-    public static int countSaturdaysAndSundays(String start, String end) {
+    public static int countSaturdaysAndSundays(String start, String end) throws InvalidDateException {
+        if (start == null || end == null)
+            throw new InvalidDateException("Dates cnnot be null");
+
         LocalDate startDate = LocalDate.parse(start, formatter);
         LocalDate endDate = LocalDate.parse(end, formatter);
+        
+        if (startDate.isAfter(endDate))
+            throw new InvalidDateException("Check-in date caanot be after checkout");
+            
         int numberOfDays = (int) DAYS.between(startDate, endDate);
         int numberOfWeekendDays = 0;
         for (int i = 0; i <= numberOfDays; i++) {
@@ -27,7 +36,7 @@ public class DateUtil {
         return numberOfWeekendDays;
     }
 
-    public static int numberOfWeekdays(String start, String end) {
+    public static int numberOfWeekdays(String start, String end) throws InvalidDateException {
         LocalDate startDate = LocalDate.parse(start, formatter);
         LocalDate endDate = LocalDate.parse(end, formatter);
         int numberOfDays = (int) DAYS.between(startDate, endDate) + 1;
