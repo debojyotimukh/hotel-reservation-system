@@ -1,11 +1,6 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -15,7 +10,6 @@ public class DateUtil {
 
     public static boolean isWeekend(String dateString) {
         LocalDate date = LocalDate.parse(dateString, formatter);
-        DayOfWeek day = date.getDayOfWeek();
         return date.getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
                 date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
     }

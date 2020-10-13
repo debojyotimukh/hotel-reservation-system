@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class HotelReservation {
     private static final List<Hotel> hotelList = new ArrayList<>();
@@ -14,19 +12,13 @@ public class HotelReservation {
         return true;
     }
 
-    public static String getCheapestHotel(String start, String end) {
-        Hotel cheapestHotel = hotelList.get(0);
-        double cheapestRate;
-
-        cheapestRate = hotelList.get(0).getPrice(start, end);
+    public static String getCheapestBestRatedHotel(String start, String end) {
+        Map<Hotel, Double> rateMap = new HashMap<>();
         for (Hotel hotel : hotelList) {
-            if (hotel.getPrice(start, end) < cheapestRate) {
-                cheapestHotel = hotel;
-                cheapestRate = hotel.getPrice(start, end);
-            }
+            if (rateMap.values().stream().min(Double::compareTo).get() >= hotel.getPrice(start, end))
+                rateMap.put(hotel, hotel.getPrice(start, end));
         }
-
-        return cheapestHotel.getName() + ", Total Rates: $" + Math.round(cheapestRate);
+        Hotel hotel=rateMap.entrySet().stream().sorted(Comparator.comparing(Hotel::getRating))
     }
 
     public static void main(String[] args) {
@@ -36,8 +28,8 @@ public class HotelReservation {
         addHotel(new Hotel("Ridgewood", 220, 150, 5));
         Scanner sc = new Scanner(System.in);
         String[] dates = sc.nextLine().replaceAll(" ", "").split(",");
-
-        System.out.println(getCheapestHotel(dates[0], dates[1]));
+        sc.close();
+        System.out.println(getCheapestBestRatedHotel(dates[0], dates[1]));
 
     }
 }

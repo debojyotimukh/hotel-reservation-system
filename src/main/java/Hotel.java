@@ -1,19 +1,18 @@
-import java.text.ParseException;
 
 public class Hotel {
     private final String name;
     private double regularWeekdayRates;
     private double regularWeekendRates;
-    private int rating;
+    private static int rating;
 
     public Hotel(String name, double regularWeekdayRates, double regularWeekendRates, int rating) {
         this.name = name;
         this.regularWeekdayRates = regularWeekdayRates;
         this.regularWeekendRates = regularWeekendRates;
-        this.rating = rating;
+        rating = rating;
     }
 
-    public int getRating() {
+    public static int getRating() {
         return rating;
     }
 
@@ -47,4 +46,6 @@ public class Hotel {
                 DateUtil.numberOfWeekdays(start, end) * regularWeekdayRates;
         return rate;
     }
+
+
 }
