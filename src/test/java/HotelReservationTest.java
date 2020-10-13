@@ -7,9 +7,9 @@ public class HotelReservationTest {
 
     @Before
     public void init() {
-        lakewood = new Hotel("Lakewood", 110, 90, 3);
-        bridgewood = new Hotel("Bridgewood", 150, 50, 4);
-        ridgewood = new Hotel("Ridgewood", 220, 150, 5);
+        lakewood = new Hotel("Lakewood", 110, 90, 80, 80, 3);
+        bridgewood = new Hotel("Bridgewood", 150, 50, 110, 50, 4);
+        ridgewood = new Hotel("Ridgewood", 220, 150, 100, 40, 5);
     }
 
     @Test
@@ -24,6 +24,6 @@ public class HotelReservationTest {
         Assert.assertTrue(HotelReservation.addHotel(lakewood));
         Assert.assertTrue(HotelReservation.addHotel(bridgewood));
         Assert.assertTrue(HotelReservation.addHotel(ridgewood));
-        Assert.assertFalse(HotelReservation.addHotel(lakewood)); //check duplicate
+        Assert.assertFalse(HotelReservation.addHotel(lakewood)); // check duplicate
     }
 }
