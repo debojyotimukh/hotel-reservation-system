@@ -15,21 +15,30 @@ public class HotelReservation {
         return true;
     }
 
-    public static String getCheapestBestRatedHotel(CUSTOMER_TYPE cType, String start, String end)
+    public static Entry<Hotel, Double> getCheapestBestRatedHotel(CUSTOMER_TYPE cType, String start, String end)
             throws InvalidDateException {
         Map<Hotel, Double> map = new TreeMap<>();
         for (Hotel hotel : hotelList) {
             map.put(hotel, hotel.getPrice(cType, start, end));
         }
 
-        Entry<Hotel, Double> result = map.entrySet().stream().sorted(Map.Entry.comparingByValue()).findFirst().get();
-        return result.getKey().getName() + ", Rating: " + result.getKey().getRating() + ", Rate: " + result.getValue();
+        return map.entrySet().stream().sorted(Map.Entry.comparingByValue()).findFirst().get();
+
     }
 
-    public static String getBestRatedHotel(CUSTOMER_TYPE cType, String start, String end)
+    public static Entry<Hotel, Double> getBestRatedHotel(CUSTOMER_TYPE cType, String start, String end)
             throws InvalidDateException {
         hotelList.sort(Comparator.naturalOrder());
-        return hotelList.get(0).getName() + ", Rate: " + hotelList.get(0).getPrice(cType, start, end);
+        Hotel bestRatedHotel = hotelList.stream().sorted(Comparator.naturalOrder()).findFirst().get();
+
+        Map<Hotel, Double> map = new HashMap<>();
+        map.put(bestRatedHotel, bestRatedHotel.getPrice(cType, start, end));
+        return map.entrySet().stream().findFirst().get();
+    }
+
+    public static void printToConsole(Entry<Hotel, Double> result) {
+        System.out.println(result.getKey().getName() + ", Rating: " + result.getKey().getRating() + ", Rate: "
+                + result.getValue());
     }
 
     public static void main(String[] args) throws InvalidHotelAttributeException {
@@ -40,10 +49,9 @@ public class HotelReservation {
         Scanner sc = new Scanner(System.in);
         String[] dates = sc.nextLine().replaceAll(" ", "").split(",");
         sc.close();
-        CUSTOMER_TYPE cType = dates[0].equalsIgnoreCase("Regular") ? CUSTOMER_TYPE.REGULAR
-                : CUSTOMER_TYPE.REWARDS;
+        CUSTOMER_TYPE cType = dates[0].equalsIgnoreCase("Regular") ? CUSTOMER_TYPE.REGULAR : CUSTOMER_TYPE.REWARDS;
         try {
-            System.out.println(getBestRatedHotel(cType, dates[1], dates[2]));
+            printToConsole(getCheapestBestRatedHotel(cType, dates[1], dates[2]));
         } catch (InvalidDateException e) {
             e.getMessage();
         }
