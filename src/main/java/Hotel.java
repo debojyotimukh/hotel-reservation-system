@@ -1,5 +1,5 @@
 
-public class Hotel {
+public class Hotel implements Comparable<Hotel> {
     private final String name;
     private double regularWeekdayRates;
     private double regularWeekendRates;
@@ -41,6 +41,11 @@ public class Hotel {
         rate = DateUtil.countSaturdaysAndSundays(start, end) * regularWeekendRates
                 + DateUtil.numberOfWeekdays(start, end) * regularWeekdayRates;
         return rate;
+    }
+
+    @Override
+    public int compareTo(Hotel other) {
+        return other.rating - this.rating;
     }
 
 }

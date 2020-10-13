@@ -18,7 +18,7 @@ public class DateUtil {
         LocalDate endDate = LocalDate.parse(end, formatter);
         int numberOfDays = (int) DAYS.between(startDate, endDate);
         int numberOfWeekendDays = 0;
-        for (int i = 0; i < numberOfDays; i++) {
+        for (int i = 0; i <= numberOfDays; i++) {
             if (startDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)
                     || startDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
                 numberOfWeekendDays++;
@@ -30,7 +30,7 @@ public class DateUtil {
     public static int numberOfWeekdays(String start, String end) {
         LocalDate startDate = LocalDate.parse(start, formatter);
         LocalDate endDate = LocalDate.parse(end, formatter);
-        int numberOfDays = (int) DAYS.between(startDate, endDate);
+        int numberOfDays = (int) DAYS.between(startDate, endDate) + 1;
         return numberOfDays - countSaturdaysAndSundays(start, end);
     }
 }

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Map.Entry;
 
 public class HotelReservation {
     private static final List<Hotel> hotelList = new ArrayList<>();
@@ -13,13 +14,13 @@ public class HotelReservation {
     }
 
     public static String getCheapestBestRatedHotel(String start, String end) {
-        Hotel cheapestHotel = hotelList.get(0);
-        double rate = cheapestHotel.getPrice(start, end);
+        Map<Hotel, Double> map = new TreeMap<>();
         for (Hotel hotel : hotelList) {
-            if (hotel.getPrice(start, end) < rate)
-                cheapestHotel = hotel;
+            map.put(hotel, hotel.getPrice(start, end));
         }
-        return cheapestHotel.getName() + ", Price: " + rate;
+
+        Entry<Hotel, Double> result = map.entrySet().stream().sorted(Map.Entry.comparingByValue()).findFirst().get();
+        return result.getKey().getName() + ", Rating: " + result.getKey().getRating() + ", Rate: " + result.getValue();
     }
 
     public static void main(String[] args) {
