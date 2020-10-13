@@ -1,4 +1,3 @@
-
 public class Hotel implements Comparable<Hotel> {
     private final String name;
     private double regularWeekdayRates;

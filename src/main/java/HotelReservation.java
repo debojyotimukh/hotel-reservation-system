@@ -23,6 +23,11 @@ public class HotelReservation {
         return result.getKey().getName() + ", Rating: " + result.getKey().getRating() + ", Rate: " + result.getValue();
     }
 
+    public static String getBestRatedHotel(String start, String end) {
+        hotelList.sort(Comparator.naturalOrder());
+        return hotelList.get(0).getName() + ", Rate: " + hotelList.get(0).getPrice(start, end);
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to hotel reservation program");
         addHotel(new Hotel("Lakewood", 110, 90, 3));
@@ -31,7 +36,7 @@ public class HotelReservation {
         Scanner sc = new Scanner(System.in);
         String[] dates = sc.nextLine().replaceAll(" ", "").split(",");
         sc.close();
-        System.out.println(getCheapestBestRatedHotel(dates[0], dates[1]));
+        System.out.println(getBestRatedHotel(dates[0], dates[1]));
 
     }
 }
