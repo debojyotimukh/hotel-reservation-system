@@ -10,8 +10,7 @@ public class DateUtil {
 
     public static boolean isWeekend(String dateString) {
         LocalDate date = LocalDate.parse(dateString, formatter);
-        return date.getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
-                date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
+        return date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
     }
 
     public static int countSaturdaysAndSundays(String start, String end) {
@@ -20,7 +19,8 @@ public class DateUtil {
         int numberOfDays = (int) DAYS.between(startDate, endDate);
         int numberOfWeekendDays = 0;
         for (int i = 0; i < numberOfDays; i++) {
-            if (startDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || startDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+            if (startDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)
+                    || startDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
                 numberOfWeekendDays++;
             startDate = startDate.plusDays(1);
         }

@@ -13,12 +13,13 @@ public class HotelReservation {
     }
 
     public static String getCheapestBestRatedHotel(String start, String end) {
-        Map<Hotel, Double> rateMap = new HashMap<>();
+        Hotel cheapestHotel = hotelList.get(0);
+        double rate = cheapestHotel.getPrice(start, end);
         for (Hotel hotel : hotelList) {
-            if (rateMap.values().stream().min(Double::compareTo).get() >= hotel.getPrice(start, end))
-                rateMap.put(hotel, hotel.getPrice(start, end));
+            if (hotel.getPrice(start, end) < rate)
+                cheapestHotel = hotel;
         }
-        Hotel hotel=rateMap.entrySet().stream().sorted(Comparator.comparing(Hotel::getRating))
+        return cheapestHotel.getName() + ", Price: " + rate;
     }
 
     public static void main(String[] args) {

@@ -3,21 +3,17 @@ public class Hotel {
     private final String name;
     private double regularWeekdayRates;
     private double regularWeekendRates;
-    private static int rating;
+    private final int rating;
 
     public Hotel(String name, double regularWeekdayRates, double regularWeekendRates, int rating) {
         this.name = name;
         this.regularWeekdayRates = regularWeekdayRates;
         this.regularWeekendRates = regularWeekendRates;
-        rating = rating;
-    }
-
-    public static int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     public double getRegularWeekendRates() {
@@ -42,10 +38,9 @@ public class Hotel {
 
     public double getPrice(String start, String end) {
         double rate;
-        rate = DateUtil.countSaturdaysAndSundays(start, end) * regularWeekendRates +
-                DateUtil.numberOfWeekdays(start, end) * regularWeekdayRates;
+        rate = DateUtil.countSaturdaysAndSundays(start, end) * regularWeekendRates
+                + DateUtil.numberOfWeekdays(start, end) * regularWeekdayRates;
         return rate;
     }
-
 
 }
