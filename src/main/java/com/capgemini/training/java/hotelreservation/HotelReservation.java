@@ -15,7 +15,7 @@ public class HotelReservation {
         return true;
     }
 
-    public static String getCheapestBestRatedHotel(Hotel.CUSTOMER_TYPE cType, String start, String end)
+    public static String getCheapestBestRatedHotel(CUSTOMER_TYPE cType, String start, String end)
             throws InvalidDateException {
         Map<Hotel, Double> map = new TreeMap<>();
         for (Hotel hotel : hotelList) {
@@ -26,13 +26,13 @@ public class HotelReservation {
         return result.getKey().getName() + ", Rating: " + result.getKey().getRating() + ", Rate: " + result.getValue();
     }
 
-    public static String getBestRatedHotel(Hotel.CUSTOMER_TYPE cType, String start, String end)
+    public static String getBestRatedHotel(CUSTOMER_TYPE cType, String start, String end)
             throws InvalidDateException {
         hotelList.sort(Comparator.naturalOrder());
         return hotelList.get(0).getName() + ", Rate: " + hotelList.get(0).getPrice(cType, start, end);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidHotelAttributeException {
         System.out.println("Welcome to hotel reservation program");
         addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
         addHotel(new Hotel("Bridgewood", 150, 50, 110, 50, 4));
@@ -40,8 +40,8 @@ public class HotelReservation {
         Scanner sc = new Scanner(System.in);
         String[] dates = sc.nextLine().replaceAll(" ", "").split(",");
         sc.close();
-        Hotel.CUSTOMER_TYPE cType = dates[0].equalsIgnoreCase("Regular") ? Hotel.CUSTOMER_TYPE.REGULAR
-                : Hotel.CUSTOMER_TYPE.REWARDS;
+        CUSTOMER_TYPE cType = dates[0].equalsIgnoreCase("Regular") ? CUSTOMER_TYPE.REGULAR
+                : CUSTOMER_TYPE.REWARDS;
         try {
             System.out.println(getBestRatedHotel(cType, dates[1], dates[2]));
         } catch (InvalidDateException e) {

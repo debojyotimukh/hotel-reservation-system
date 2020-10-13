@@ -1,21 +1,32 @@
 package com.capgemini.training.java.hotelreservation;
 
+import java.util.regex.Pattern;
+
+enum CUSTOMER_TYPE {
+    REGULAR, REWARDS;
+}
+
 public class Hotel implements Comparable<Hotel> {
     private final String name;
     private double regularWeekdayRates;
     private double regularWeekendRates;
     private double specialWeekdayRates;
     private double specialWeekendRates;
-
-    public enum CUSTOMER_TYPE {
-        REGULAR, REWARDS;
-    }
-
     private final int rating;
 
     public Hotel(String name, double regularWeekdayRates, double regularWeekendRates, double specialWeekdayRates,
-            double specialWeekendRates, int rating) {
-        
+            double specialWeekendRates, int rating) throws InvalidHotelAttributeException {
+        // validation
+        if (regularWeekdayRates < 1 || regularWeekendRates < 1 || specialWeekdayRates < 1 || specialWeekendRates < 1)
+            throw new InvalidHotelAttributeException("Rates cannot be less than 1");
+
+        if (!Pattern.matches("[A-Z][a-z]{2,}", name))
+            throw new InvalidHotelAttributeException("Illegal hotel name");
+
+        if (rating < 1 || rating > 5)
+            throw new InvalidHotelAttributeException("Rating must be between 1-5");
+
+        // assignment
         this.name = name;
         this.regularWeekdayRates = regularWeekdayRates;
         this.regularWeekendRates = regularWeekendRates;
@@ -32,7 +43,10 @@ public class Hotel implements Comparable<Hotel> {
         return regularWeekendRates;
     }
 
-    public void setRegularWeekendRates(double regularWeekendRates) {
+    public void setRegularWeekendRates(double regularWeekendRates) throws InvalidHotelAttributeException {
+        if (regularWeekendRates < 1)
+            throw new InvalidHotelAttributeException("Rates cannot be less than 1");
+
         this.regularWeekendRates = regularWeekendRates;
     }
 
@@ -44,7 +58,10 @@ public class Hotel implements Comparable<Hotel> {
         return regularWeekdayRates;
     }
 
-    public void setRegularWeekdayRates(double regularWeekdayRates) {
+    public void setRegularWeekdayRates(double regularWeekdayRates) throws InvalidHotelAttributeException {
+        if (regularWeekdayRates < 1)
+            throw new InvalidHotelAttributeException("Rates cannot be less than 1");
+
         this.regularWeekdayRates = regularWeekdayRates;
     }
 
@@ -67,7 +84,10 @@ public class Hotel implements Comparable<Hotel> {
         return specialWeekdayRates;
     }
 
-    public void setSpecialWeekdayRates(double specialWeekdayRates) {
+    public void setSpecialWeekdayRates(double specialWeekdayRates) throws InvalidHotelAttributeException {
+        if (specialWeekdayRates < 1)
+            throw new InvalidHotelAttributeException("Rates cannot be less than 1");
+
         this.specialWeekdayRates = specialWeekdayRates;
     }
 
@@ -75,7 +95,10 @@ public class Hotel implements Comparable<Hotel> {
         return specialWeekendRates;
     }
 
-    public void setSpecialWeekendRates(double specialWeekendRates) {
+    public void setSpecialWeekendRates(double specialWeekendRates) throws InvalidHotelAttributeException {
+        if (specialWeekendRates < 1)
+            throw new InvalidHotelAttributeException("Rates cannot be less than 1");
+
         this.specialWeekendRates = specialWeekendRates;
     }
 

@@ -8,7 +8,7 @@ public class HotelReservationTest {
     public Hotel lakewood, bridgewood, ridgewood;
 
     @Before
-    public void init() {
+    public void init() throws InvalidHotelAttributeException {
         lakewood = new Hotel("Lakewood", 110, 90, 80, 80, 3);
         bridgewood = new Hotel("Bridgewood", 150, 50, 110, 50, 4);
         ridgewood = new Hotel("Ridgewood", 220, 150, 100, 40, 5);
