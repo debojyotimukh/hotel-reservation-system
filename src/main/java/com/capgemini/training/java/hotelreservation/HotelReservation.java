@@ -41,7 +41,7 @@ public class HotelReservation {
                 + result.getValue());
     }
 
-    public static void main(String[] args) throws InvalidHotelAttributeException {
+    public static void main(String[] args) throws InvalidHotelAttributeException, InvalidCustomerTypeException {
         System.out.println("Welcome to hotel reservation program");
         addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
         addHotel(new Hotel("Bridgewood", 150, 50, 110, 50, 4));
@@ -49,6 +49,8 @@ public class HotelReservation {
         Scanner sc = new Scanner(System.in);
         String[] dates = sc.nextLine().replaceAll(" ", "").split(",");
         sc.close();
+        if((!dates[0].equalsIgnoreCase("Regular"))&&(!dates[0].equalsIgnoreCase("Reward")))
+            throw new InvalidCustomerTypeException();
         CUSTOMER_TYPE cType = dates[0].equalsIgnoreCase("Regular") ? CUSTOMER_TYPE.REGULAR : CUSTOMER_TYPE.REWARDS;
         try {
             printToConsole(getCheapestBestRatedHotel(cType, dates[1], dates[2]));
